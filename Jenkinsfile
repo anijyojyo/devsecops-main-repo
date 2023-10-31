@@ -102,26 +102,29 @@ environment {
 //         }
 //     }
 // }
-        // stage('Trivy Scan') {
-        //             steps {
-        //                 script {
-        //                     // Run Trivy for vulnerability scanning
-        //                     sh "bash trivy-scan.sh"
-        //                 } 
-        //             }
-        //         }
-        // stage('Docker Build and Push') {
-        //     steps {
-        //         script {
-        //             def dockerImageName = "dsocouncil/node-service:${env.GIT_COMMIT}"
+        stage('Trivy Scan') {
+                    steps {
+                        script {
+                            // Run Trivy for vulnerability scanning
+                            sh "bash trivy-scan.sh"
+                        } 
+                    }
+                }
+        stage('Docker Build and Push') {
+            steps {
+                script {
+                    def dockerImageName = "dsocouncil/node-service:${env.GIT_COMMIT}"
 
-        //             withDockerRegistry(credentialsId: "dockerhub", url: "https://index.docker.io/v1/") {
-        //                 sh "docker build -t ${dockerImageName} ."
-        //                 sh "docker push ${dockerImageName}"
-        //             }
-        //         }
-        //     }
-        // }
+                    withDockerRegistry(credentialsId: "dockerhub", url: "https://index.docker.io/v1/") {
+                        sh "docker build -t ${dockerImageName} ."
+                        sh "docker push ${dockerImageName}"
+                    }
+                }
+            }
+        }
+
+
+
     //     stage('Kubernetes - Vulnerability Scan') {
     //   steps {
     //     parallel(
