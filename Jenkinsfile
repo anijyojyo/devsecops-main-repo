@@ -110,18 +110,18 @@ environment {
                         } 
                     }
                 }
-        stage('Docker Build and Push') {
-            steps {
-                script {
-                    def dockerImageName = "dsocouncil/node-service:${env.GIT_COMMIT}"
+        // stage('Docker Build and Push') {
+        //     steps {
+        //         script {
+        //             def dockerImageName = "dsocouncil/node-service:${env.GIT_COMMIT}"
 
-                    withDockerRegistry(credentialsId: "dockerhub", url: "https://index.docker.io/v1/") {
-                        sh "docker build -t ${dockerImageName} ."
-                        sh "docker push ${dockerImageName}"
-                    }
-                }
-            }
-        }
+        //             withDockerRegistry(credentialsId: "dockerhub", url: "https://index.docker.io/v1/") {
+        //                 sh "docker build -t ${dockerImageName} ."
+        //                 sh "docker push ${dockerImageName}"
+        //             }
+        //         }
+        //     }
+        // }
 
 
 
@@ -159,11 +159,11 @@ environment {
         //     }  
 
 
-        // stage('docker version') {       
-        //     steps {         
-        //         sh "docker -v"       
-        //     }     
-        // }       
+        stage('docker version') {       
+            steps {         
+                sh "docker -v"       
+            }     
+        }       
         stage('Kubernetes Deployment - DEV') {
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
