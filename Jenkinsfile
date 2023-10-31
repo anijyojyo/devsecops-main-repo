@@ -31,6 +31,21 @@ environment {
         //         }
         //     }
         // }
+
+        stage('Static Analysis - SonarQube') {
+             steps {
+
+                         sh "mvn sonar:sonar -Dsonar.projectKey=DecSecOpsPipeline2 -Dsonar.host.url=http://192.168.220.130:9000 -Dsonar.login=sqp_66556cd4ec90ee90fc3f1615cea076244fee249d"
+                     }
+                 }
+
+
+
+
+
+
+
+
         // stage('Static Analysis - SonarQube') {
         //     steps {
         //         script {
