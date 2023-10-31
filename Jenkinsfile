@@ -169,7 +169,8 @@ environment {
             steps {         
                 withKubeConfig([credentialsId: 'kubeconfig']) {           
                 sh "kubectl version --short"         
-        }       
+        }
+            }       
 
 
 
