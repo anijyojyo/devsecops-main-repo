@@ -46,6 +46,8 @@ environment {
                          waitForQualityGate abortPipeline: true
                      }
         	  }
+             }
+        }
 
 
 
