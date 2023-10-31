@@ -159,11 +159,11 @@ environment {
         //     }  
 
 
-        stage('docker version') {       
-            steps {         
-                sh "docker -v"       
-            }     
-        }       
+        // stage('docker version') {       
+        //     steps {         
+        //         sh "docker -v"       
+        //     }     
+        // }       
         stage('Kubernetes Deployment - DEV') {
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
