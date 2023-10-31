@@ -35,9 +35,9 @@ environment {
         stage('Static Analysis - SonarQube') {
              steps {
 		script {
-			withSonarQubeEnv(installationName: 'secdev') {
+			withSonarQubeEnv(installationName: 'devsec') {
 
-                         sh "mvn sonar:sonar -Dsonar.projectKey=DecSecOpsPipeline2 -Dsonar.host.url=http://192.168.220.130:9000 -Dsonar.login=sqp_66556cd4ec90ee90fc3f1615cea076244fee249d"
+                         sh "mvn sonar:sonar -Dsonar.projectKey=DecSecOpsPipeline1 -Dsonar.host.url=http://192.168.220.132:9000 -Dsonar.login=sqp_e20e34a329542e34dc7d9f596be928150de1e188"
                      }
                  }	
 
