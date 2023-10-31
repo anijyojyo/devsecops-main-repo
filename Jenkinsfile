@@ -37,7 +37,7 @@ environment {
 		script {
 			withSonarQubeEnv(installationName: 'Devsec') {
 
-                         sh "mvn sonar:sonar -Dsonar.projectKey=DecSecOpsPipeline1 -Dsonar.host.url=http://192.168.220.132:9000 -Dsonar.login=sqp_3a37212bc5e6feb0327b33601a5eb8f2dcab8dcc"
+                         sh "mvn sonar:sonar -Dsonar.projectKey=DecSecOpsPipeline1 -Dsonar.host.url=http://192.168.220.132:9000 -Dsonar.login=squ_0fb9c66cee086fa38de4df1e69631d1102edb889"
                      }
                  }	
 
