@@ -77,14 +77,14 @@ environment {
 //         }
 //     }
 // }
-        stage('Trivy Scan') {
-                    steps {
-                        script {
-                            // Run Trivy for vulnerability scanning
-                            sh "bash trivy-scan.sh"
-                        } 
-                    }
-                }
+        // stage('Trivy Scan') {
+        //             steps {
+        //                 script {
+        //                     // Run Trivy for vulnerability scanning
+        //                     sh "bash trivy-scan.sh"
+        //                 } 
+        //             }
+        //         }
         // stage('Docker Build and Push') {
         //     steps {
         //         script {
@@ -128,7 +128,14 @@ environment {
 
         //         }
         //     }
-        //     }    
+        //     }  
+
+
+        stage('docker version') {       
+            steps {         
+                sh "docker -v"       
+            }     
+        }       
         stage('Kubernetes Deployment - DEV') {
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
