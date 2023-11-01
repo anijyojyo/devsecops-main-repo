@@ -165,26 +165,26 @@ environment {
             }     
         }    
 
-        stage('kubernetes version') {       
-            steps {         
-                withKubeConfig([credentialsId: 'kubeconfig']) {           
-                sh "kubectl version --short"         
+        // stage('kubernetes version') {       
+        //     steps {         
+        //         withKubeConfig([credentialsId: 'kubeconfig']) {           
+        //         sh "kubectl version --short"         
+        // }
+        //     } 
+        // }      
+
+
+
+
+        stage('Kubernetes Deployment - DEV') {
+            steps {
+                withKubeConfig([credentialsId: 'kubeconfig']) {
+                    sh "cp k8s_deployment_service.yaml k8s_deployment_service_temp.yaml"
+                    sh "sed -i 's#replace#dsocouncil/node-service:${GIT_COMMIT}#g' k8s_deployment_service_temp.yaml"
+                    sh "kubectl apply -f k8s_deployment_service_temp.yaml"
+                    sh "rm k8s_deployment_service_temp.yaml"
+                }
+            }
         }
-            } 
-        }      
-
-
-
-
-//         stage('Kubernetes Deployment - DEV') {
-//             steps {
-//                 withKubeConfig([credentialsId: 'kubeconfig']) {
-//                     sh "cp k8s_deployment_service.yaml k8s_deployment_service_temp.yaml"
-//                     sh "sed -i 's#replace#dsocouncil/node-service:${GIT_COMMIT}#g' k8s_deployment_service_temp.yaml"
-//                     sh "kubectl apply -f k8s_deployment_service_temp.yaml"
-//                     sh "rm k8s_deployment_service_temp.yaml"
-//                 }
-//             }
-//         }
      }
  }
