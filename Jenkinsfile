@@ -48,7 +48,7 @@ environment {
                     def sonarHostUrl = 'http://192.168.1.13:9000'
                     def sonarToken = 'sqp_b5560f98c9b66529e981be28d1411c707a2ded64'
 
-                    withSonarQubeEnv('secops-application') {
+                    withSonarQubeEnv('SonarQube') {
                         sh "mvn sonar:sonar -Dsonar.projectKey=${sonarProjectKey} -Dsonar.host.url=${sonarHostUrl} -Dsonar.login=${sonarToken}"
                     }
                 }
