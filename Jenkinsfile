@@ -41,33 +41,14 @@ environment {
 
 
 
-        stage('Static Analysis - SonarQube') {
-            steps {
-                script {
-                    def sonarProjectKey = 'secops-application'
-                    def sonarHostUrl = 'http://192.168.1.13:9000'
-                    def sonarToken = 'sqp_b5560f98c9b66529e981be28d1411c707a2ded64'
-
-                    withSonarQubeEnv('SonarQube') {
-                        sh "mvn sonar:sonar -Dsonar.projectKey=${sonarProjectKey} -Dsonar.host.url=${sonarHostUrl} -Dsonar.login=${sonarToken}"
-                    }
-                }
-
-                timeout(time: 2, unit: 'MINUTES') {
-                    script {
-                        waitForQualityGate abortPipeline: true
-                    }
-                }
-            }
-        }
         // stage('Static Analysis - SonarQube') {
         //     steps {
         //         script {
-        //             def sonarProjectKey = 'secdev'
-        //             def sonarHostUrl = 'http://secopsdev.eastus.cloudapp.azure.com:9000'
-        //             def sonarToken = 'sqa_c5eb9ab4ccd48bd0e58f4c555e2709aba68fdcc6'
+        //             def sonarProjectKey = 'secops-application'
+        //             def sonarHostUrl = 'http://192.168.1.13:9000'
+        //             def sonarToken = 'sqp_b5560f98c9b66529e981be28d1411c707a2ded64'
 
-        //             withSonarQubeEnv('secdev') {
+        //             withSonarQubeEnv('SonarQube') {
         //                 sh "mvn sonar:sonar -Dsonar.projectKey=${sonarProjectKey} -Dsonar.host.url=${sonarHostUrl} -Dsonar.login=${sonarToken}"
         //             }
         //         }
@@ -79,7 +60,7 @@ environment {
         //         }
         //     }
         // }
-
+        
 
         stage('SCA Scan - Dependency-Check') {
             steps {
