@@ -32,31 +32,34 @@ environment {
         //     }
         // }
 
+
+
+
+
+
+
+
+
+
         stage('Static Analysis - SonarQube') {
-             steps {
-		script {
-			// withSonarQubeEnv(installationName: 'secops-application') {
-			withSonarQubeEnv('secops-application') {	
+            steps {
+                script {
+                    def sonarProjectKey = 'secops-application'
+                    def sonarHostUrl = 'http://192.168.1.13:9000'
+                    def sonarToken = 'sqp_b5560f98c9b66529e981be28d1411c707a2ded64'
 
-                         sh "mvn sonar:sonar -Dsonar.projectKey=secops-application -Dsonar.host.url=http://192.168.1.13:9000 -Dsonar.login=sqp_b5560f98c9b66529e981be28d1411c707a2ded64"
-                     }
-                 }	
+                    withSonarQubeEnv('secops-application') {
+                        sh "mvn sonar:sonar -Dsonar.projectKey=${sonarProjectKey} -Dsonar.host.url=${sonarHostUrl} -Dsonar.login=${sonarToken}"
+                    }
+                }
 
-                 timeout(time: 2, unit: 'MINUTES') {
-                     script {
-                         waitForQualityGate abortPipeline: true
-                     }
-        	  }
-             }
+                timeout(time: 2, unit: 'MINUTES') {
+                    script {
+                        waitForQualityGate abortPipeline: true
+                    }
+                }
+            }
         }
-
-
-
-
-
-
-
-
         // stage('Static Analysis - SonarQube') {
         //     steps {
         //         script {
@@ -76,6 +79,7 @@ environment {
         //         }
         //     }
         // }
+
 
         stage('SCA Scan - Dependency-Check') {
             steps {
